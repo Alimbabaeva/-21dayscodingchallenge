@@ -14,3 +14,17 @@ var isPalindrome = function(x) {
     return x === reverse || x === ~~(reverse/10);
 };
 
+
+
+//2652. Sum Multiples
+let sumOfMultiples = function (n) {
+  let result = 0;
+
+  for (let i = 1; i <= n; i++) {
+    if (i % 3 === 0 || i % 5 === 0 || i % 7 === 0) {
+      result = result + i;
+    }
+  }
+
+  return result;
+};
