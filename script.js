@@ -73,3 +73,29 @@ var mergeKLists = function(lists) {
   
   return r;
 };
+
+// 101. Symmetric Tree
+//approach: recursion Pre-order (separating sides, two pointer-recursion check)
+//since we know there is mirroring for the side, we will have to traversing in a opposite way for left and right sides
+//we will have two pointers that will be moving at the same pace, for both left and right side,(can also think of it as separating sides)
+//then for left side, we do (Root, Right, Left)
+//then for right side, we do (Root, Left, Right)
+//checks are: 
+//if the nodes are both null  --> return true (works for the case for only root as well.)
+//if one node is null and the other is not --> return false (we know the nodes are not the same)
+//if the nodes have the same value --> if not return false
+
+var isSymmetric = function(root) {
+    
+    function helper(lRoot, rRoot){
+        
+        if(lRoot == null && rRoot == null) return true; //if both are null, we know so far everything is the same
+        
+        if(!lRoot || !rRoot) return false;  //if one of them is null, we know the nodes dont match
+        
+        if(lRoot.val != rRoot.val) return false; //if the root.values dont match for both nodes, we know the nodes are not the same
+        
+        return helper(lRoot.right, rRoot.left) && helper(lRoot.left, rRoot.right);
+    }
+    return helper(root.left, root.right);
+};
