@@ -176,3 +176,19 @@ var maxPathSum = function(root) {
     rec(root);
     return sum;
 };
+//40. Combination Sum II
+const combinationSum2 = (candidates, target) => {
+    const res = [];
+    candidates.sort((a, b) => a - b);
+  
+    const helper = (comb, t, i) => {
+      if (t === 0) return res.push(comb);
+  
+      for (let j = i; j < candidates.length; j++) {
+        if (j > i && candidates[j] === candidates[j - 1]) continue;
+        if (candidates[j] <= t) helper([...comb, candidates[j]], t - candidates[j], j + 1);
+      }
+    };
+    helper([], target, 0);
+    return res;
+  };
